@@ -1,0 +1,36 @@
+import eslint from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import perfectionist from 'eslint-plugin-perfectionist';
+import vitest from '@vitest/eslint-plugin';
+
+export default tseslint.config(
+  {
+    ignores: [
+      'dist/**/*.js', // Ignore compiled output
+      'node_modules/**', // Ignore dependencies
+      '*.config.js' // Ignore other config files
+    ]
+  },
+  eslint.configs.recommended,
+  tseslint.configs.strictTypeChecked,
+  tseslint.configs.stylisticTypeChecked,
+  {
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname
+      }
+    }
+  },
+  perfectionist.configs['recommended-natural'],
+  {
+    files: ['**/*.test.ts', '**/*.spec.ts'],
+    plugins: {
+      vitest
+    },
+    rules: {
+      ...vitest.configs.recommended.rules,
+      '@typescript-eslint/unbound-method': 'off'
+    }
+  }
+);

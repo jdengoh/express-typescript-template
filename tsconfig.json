@@ -1,0 +1,13 @@
+{
+  "extends": "@tsconfig/node24/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"]
+    },
+    "outDir": "./dist",
+    "rootDir": "./src" // This is crucial - set to src!
+  },
+  "include": ["src/**/*.ts", "src/**/*.spec.ts", "src/**/*.test.ts"],
+  "exclude": ["dist", "node_modules"]
+}
